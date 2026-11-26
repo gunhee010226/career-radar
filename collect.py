@@ -3,7 +3,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 KST=datetime.timezone(datetime.timedelta(hours=9))
 NOW=datetime.datetime.now(KST); TODAY=NOW.date().isoformat()
-BOARDS={'BoschGroup':'Bosch','Aumovio':'AUMOVIO','RenesasElectronics':'Renesas Electronics'}
+BOARDS={'BoschGroup':'Bosch','Aumovio':'AUMOVIO','RenesasElectronics':'Renesas Electronics','Rotork1':'Rotork','sikaag':'Sika','IMSNanofabricationGmbH':'IMS Nanofabrication'}
 RULES=[(100,r'\bmotor\b|모터|전동기|electric drive','모터 개발'),(95,r'전동화|구동시스템|powertrain|electrification','전동화'),(92,r'\bewp\b|\bpump\b|펌프|thermal management|열관리','펌프·열관리'),(90,r'mechanical|기구|기계설계|구조설계','기계·기구 설계'),(85,r'validation|test engineer|시험|검증|신뢰성','시험검증'),(83,r'\bcfd\b|\bcae\b|\bfea\b|유동해석|열유동|구조해석','CAE·열유동'),(80,r'fuel cell|연료전지|수소|hydrogen','수소연료전지'),(76,r'robot|로봇|항공|propulsion|aerospace','로봇·항공'),(70,r'자동차|automotive|r&d|연구개발|설계|engineer','기술 개발')]
 def fetch(url):
     req=urllib.request.Request(url,headers={'User-Agent':'CareerRadar/2.1','Accept':'application/json'})
@@ -16,8 +16,7 @@ def date(v):
 def make(key,company,title,typ,start,end,url,loc='',experience=''):
     start,end=date(start),date(end)
     if not title or not company or not url.startswith('https://') or (end and end<TODAY) or (start and start>TODAY):return None
-    fit,why=next(((n,w) for n,p,w in RULES if re.search(p,title,re.I)),(0,'기타 직무'))
-    if not fit:return None
+    fit,why=next(((n,w) for n,p,w in RULES if re.search(p,title,re.I)),(15,'기타 직무 · 전공 연관성 낮거나 미확인'))
     if re.search(r'\bsenior\b|\bsr\b|\blead\b|\bprincipal\b|\bmanager\b|팀장|수석',title,re.I):fit=max(0,fit-25);elig='확인 필요';why+=' · 선임 직급 확인'
     elif re.search(r'신입|인턴|entry.level|intern|graduate',title,re.I):elig='신입 포함'
     else:elig='확인 필요'
@@ -43,7 +42,7 @@ def smart(board,company):
         total=int(data['totalFound'])
         if not rows and offset<total:raise ValueError('incomplete pagination')
         if offset>=total:return out
-        if offset>=2000:raise ValueError('pagination limit')
+        if not rows:raise ValueError('pagination stalled')
 def work24():
     import xml.etree.ElementTree as ET
     key=os.environ.get('WORK24_AUTH_KEY','')
@@ -58,7 +57,6 @@ def work24():
             if total and not rows:raise ValueError('unexpected schema')
             for p in rows:
                 g=lambda k:p.findtext(k,'')
-                if not date(g('empWantedEndt')):continue
                 j=make('work24'+g('empSeqno'),g('empBusiNm'),g('empWantedTitle'),typ,g('empWantedStdt'),g('empWantedEndt'),g('empWantedHomepgDetail') or g('empWantedMobileUrl'),experience=g('empWantedTypeNm'))
                 if j:
                     j.update(checkedAt=NOW.isoformat(timespec='seconds'),source='고용24')
