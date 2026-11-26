@@ -1,0 +1,35 @@
+name: Refresh job listings
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+  push:
+    paths:
+      - collect.py
+      - .github/workflows/refresh.yml
+permissions:
+  contents: write
+concurrency:
+  group: career-radar-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python collect.py
+        env:
+          WORK24_AUTH_KEY: ${{ secrets.WORK24_AUTH_KEY }}
+          WORK24_PUBLISH_ALLOWED: ${{ vars.WORK24_PUBLISH_ALLOWED }}
+      - name: Publish snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jobs.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Refresh current job listings"
+          git push
