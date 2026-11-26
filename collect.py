@@ -19,7 +19,7 @@ def make(key,company,title,typ,start,end,url,loc='',experience=''):
     fit,why=next(((n,w) for n,p,w in RULES if re.search(p,title,re.I)),(0,'기타 직무'))
     if not fit:return None
     if re.search(r'\bsenior\b|\bsr\b|\blead\b|\bprincipal\b|\bmanager\b|팀장|수석',title,re.I):fit=max(0,fit-25);elig='확인 필요';why+=' · 선임 직급 확인'
-    elif re.search(r'신입|인턴|entry.level|intern|graduate',title+' '+experience,re.I):elig='신입 포함'
+    elif re.search(r'신입|인턴|entry.level|intern|graduate',title,re.I):elig='신입 포함'
     else:elig='확인 필요'
     return dict(id=hashlib.sha256(key.encode()).hexdigest()[:16],company=company,role=title,type=typ,start=start,end=end,fit=fit,elig=elig,reason=why+' · 제목 기반 평가, 필수 자격 원문 확인'+(' · '+loc if loc else ''),url=url)
 def smart(board,company):
@@ -34,10 +34,15 @@ def smart(board,company):
             if str(l.get('country','')).lower() not in ('kr','kor','korea','south korea','republic of korea'):continue
             pid=str(p.get('id',''))
             if not pid:continue
-            j=make(board+pid,company,str(p.get('name','')),'외국계',p.get('releasedDate'),'','https://jobs.smartrecruiters.com/'+board+'/'+pid,str(l.get('city','')),str((p.get('experienceLevel') or {}).get('label','')))
-            if j:out.append(j)
+            j=make(board+pid,company,str(p.get('name','')),'외국계','','','https://jobs.smartrecruiters.com/'+board+'/'+pid,str(l.get('city','')),str((p.get('experienceLevel') or {}).get('label','')))
+            if j:
+                j.update(published=date(p.get('releasedDate')),checkedAt=NOW.isoformat(timespec='seconds'),source='공식 채용 API',experienceLabel=str((p.get('experienceLevel') or {}).get('label','')))
+                out.append(j)
         offset+=len(rows)
-        if not rows or offset>=int(data.get('totalFound',offset)):return out
+        if 'totalFound' not in data:raise ValueError('pagination metadata missing')
+        total=int(data['totalFound'])
+        if not rows and offset<total:raise ValueError('incomplete pagination')
+        if offset>=total:return out
         if offset>=2000:raise ValueError('pagination limit')
 def work24():
     import xml.etree.ElementTree as ET
@@ -55,7 +60,9 @@ def work24():
                 g=lambda k:p.findtext(k,'')
                 if not date(g('empWantedEndt')):continue
                 j=make('work24'+g('empSeqno'),g('empBusiNm'),g('empWantedTitle'),typ,g('empWantedStdt'),g('empWantedEndt'),g('empWantedHomepgDetail') or g('empWantedMobileUrl'),experience=g('empWantedTypeNm'))
-                if j:out.append(j)
+                if j:
+                    j.update(checkedAt=NOW.isoformat(timespec='seconds'),source='고용24')
+                    out.append(j)
             if page*100>=total:break
         else:raise ValueError('pagination limit')
     return out
