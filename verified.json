@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-28T01:10:27+09:00",
+  "updated": "2026-11-28T02:46:16+09:00",
   "status": {
-    "공식 원문 조사": "현대모비스 3건, SFA 2건, Amazon 1건 재검증. Hitachi Energy 1건 신규. AUMOVIO 3건 근무지 재검증 미완료, 기존 시각 유지.",
-    "포털 탐색": "13개 도메인 묶음 공개 검색 시도. LinkedIn·캐치·잡플래닛 결과 확인. 나머지 10개 개별 결과 미확인.",
+    "공식 원문 조사": "기존 7건 재검증, AUMOVIO 3건 근무지 미확인으로 기존 시각 유지. Teradyne 2건 신규. 한화모멘텀 마감 출처 상충으로 보류.",
+    "포털 탐색": "13개 도메인 묶음 검색 시도. LinkedIn·자소설닷컴·리멤버 결과 확인. 나머지 10개 개별 결과 미확인.",
     "제한": "급여 우위 및 상위 50% 미검증. 전체 시장 조사 미완료."
   },
   "jobs": [
@@ -18,7 +18,7 @@
       "elig": "신입 포함",
       "reason": "의왕연구소 · DV/PV 및 시작품 검증 관련. 학사·석사 졸업(예정) 및 지정 기간 공인영어성적 등 필수 자격 원문 확인.",
       "url": "https://careers.mobis.com/jobs-view?seq=4215",
-      "checkedAt": "2026-11-28T01:10:27+09:00"
+      "checkedAt": "2026-11-28T02:46:16+09:00"
     },
     {
       "id": "aumovio-744000163298259",
@@ -46,7 +46,7 @@
       "elig": "확인 필요",
       "reason": "동탄·아산, 정규직. 반도체 및 물류 기구설계, 배터리 시스템설계, 기류 시뮬레이션 등 포함. 전체 공고 경력 무관 표시이나 직무별 필수 경력은 이미지 공고문 확인 필요. 20개 부문 공통 상세 URL로 통합.",
       "url": "https://recruit.sfa.co.kr/sfa/recruit?id=1561&pg=1",
-      "checkedAt": "2026-11-28T01:10:27+09:00",
+      "checkedAt": "2026-11-28T02:46:16+09:00",
       "discoverySource": "캐치·잡코리아"
     },
     {
@@ -75,7 +75,7 @@
       "elig": "신입 포함",
       "reason": "의왕연구소 · 전장품 고장 분석 및 검증. 전자·전기·통신·SW 등 우대; 필수 영어성적 등 원문 확인.",
       "url": "https://careers.mobis.com/jobs-view?seq=4216",
-      "checkedAt": "2026-11-28T01:10:27+09:00"
+      "checkedAt": "2026-11-28T02:46:16+09:00"
     },
     {
       "id": "aumovio-744000163298219",
@@ -103,7 +103,7 @@
       "elig": "확인 필요",
       "reason": "충남 천안, 정규직. 변압기 구조설계 및 FEA, 기계공학 학사·석사 및 전기기기 구조설계 경험 요구, 연수 미명시. 게시일 2026-09-15, 공식 지원 링크 활성, 접수기간 미공개.",
       "url": "https://www.hitachienergy.com/careers/open-jobs/details/JID3-215945",
-      "checkedAt": "2026-11-28T01:10:27+09:00",
+      "checkedAt": "2026-11-28T02:46:16+09:00",
       "discoverySource": "LinkedIn"
     },
     {
@@ -118,7 +118,22 @@
       "elig": "경력 미충족",
       "reason": "의왕연구소 · 해당 분야 6년 이상(석사 4년 이상), PLC 실무 경력 요구.",
       "url": "https://careers.mobis.com/jobs-view?seq=4218",
-      "checkedAt": "2026-11-28T01:10:27+09:00"
+      "checkedAt": "2026-11-28T02:46:16+09:00"
+    },
+    {
+      "id": "teradyne-1414022600",
+      "company": "Teradyne",
+      "role": "Mechanical Engineer",
+      "type": "외국계",
+      "start": "",
+      "end": "",
+      "endAt": "",
+      "fit": 48,
+      "elig": "경력 미충족",
+      "reason": "서울. 반도체 검사장비 기계설계 및 열·구조 검증. 학사 8년 또는 석사 6년 이상 필수. 게시일 2026-11-23, 공식 지원 링크 표시, 접수기간 미공개.",
+      "url": "https://jobs.teradyne.com/Teradyne/job/Seoul-Mechanical-Engineer/1414022600/",
+      "checkedAt": "2026-11-28T02:46:16+09:00",
+      "discoverySource": "LinkedIn"
     },
     {
       "id": "amazon-10592136",
@@ -132,8 +147,22 @@
       "elig": "경력 미충족",
       "reason": "서울 소재 공고, 인천 협력사 현장 업무 포함. 반도체 검사장비 검증 및 기술 지원. 기계공학 학사 및 자동 검사장비 실무 5년 이상 필수. 공식 지원 링크 확인, 접수 기간 미공개.",
       "url": "https://www.amazon.jobs/en/jobs/10592136/senior-equipment-engineer-annapurna-labs",
-      "checkedAt": "2026-11-28T01:10:27+09:00",
+      "checkedAt": "2026-11-28T02:46:16+09:00",
       "discoverySource": "원티드"
+    },
+    {
+      "id": "teradyne-1451691100",
+      "company": "Teradyne",
+      "role": "Service Engineer",
+      "type": "외국계",
+      "start": "",
+      "end": "",
+      "endAt": "",
+      "fit": 40,
+      "elig": "확인 필요",
+      "reason": "인천 현장 근무, 공고 표기 서울. 검사장비 서비스팀 리드, 기계·전기 문제 분석. 관련 전공 및 경험 요구, 경력 연수 미명시. 게시일 2026-11-18, 지원 링크 표시.",
+      "url": "https://jobs.teradyne.com/Teradyne/job/Seoul-Service-Engineer/1451691100/",
+      "checkedAt": "2026-11-28T02:46:16+09:00"
     },
     {
       "id": "sfa-1560",
@@ -147,7 +176,7 @@
       "elig": "확인 필요",
       "reason": "동탄, 정규직. 경력 무관 표시이나 세부 자격은 공고문 확인 필요. 기계설계와 직접 연관성 낮음.",
       "url": "https://recruit.sfa.co.kr/sfa/recruit?id=1560&pg=1",
-      "checkedAt": "2026-11-28T01:10:27+09:00",
+      "checkedAt": "2026-11-28T02:46:16+09:00",
       "discoverySource": "캐치"
     }
   ]
